@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dragon Point Development Co. | Building Brevard's Next Legacy</title>
+<meta name="description" content="A Brevard County development company with the vision to transform landmarks, the expertise to execute, and the ambition to leave a mark that lasts generations.">
+<meta property="og:title" content="Dragon Point Development Co.">
+<meta property="og:description" content="Building Brevard's Next Legacy. $100M in development by 2035.">
+<meta property="og:type" content="website">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #0A0A0A;
+    --dark: #111111;
+    --charcoal: #1A1A1A;
+    --gold: #C9A84C;
+    --gold-light: #E0C56A;
+    --gold-dim: rgba(201,168,76,0.15);
+    --white: #F5F5F0;
+    --gray: #777777;
+    --gray-light: #AAAAAA;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--black);
+    color: var(--white);
+    line-height: 1.7;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.25rem 3rem;
+    background: rgba(10,10,10,0.9);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(201,168,76,0.08);
+    transition: padding 0.3s, background 0.3s;
+  }
+  nav.scrolled {
+    padding: 0.8rem 3rem;
+    background: rgba(10,10,10,0.95);
+    border-bottom-color: rgba(201,168,76,0.15);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; font-weight: 600;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--gold);
+  }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    color: var(--gray-light); text-decoration: none;
+    font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -4px; left: 0; right: 0;
+    height: 1px; background: var(--gold);
+    transform: scaleX(0); transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center;
+    padding: 7rem 2rem 5rem;
+    position: relative;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 35%, rgba(201,168,76,0.04) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    font-size: 0.65rem; letter-spacing: 5px; text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(201,168,76,0.25);
+    padding: 0.45rem 1.6rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.6rem, 5.5vw, 5rem);
+    font-weight: 700;
+    line-height: 1.08;
+    margin-bottom: 1.5rem;
+    position: relative;
+    letter-spacing: -0.5px;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero-tagline {
+    font-size: 1.05rem; font-weight: 300;
+    color: var(--gray-light);
+    max-width: 560px;
+    margin-bottom: 3.5rem;
+    position: relative;
+    line-height: 1.8;
+  }
+  .hero-stats {
+    display: flex; gap: 3.5rem;
+    position: relative;
+  }
+  .hero-stat {
+    text-align: center;
+  }
+  .hero-stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem; font-weight: 700; color: var(--gold);
+    display: block;
+    line-height: 1.2;
+  }
+  .hero-stat-label {
+    font-size: 0.65rem; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--gray);
+    margin-top: 0.3rem;
+    display: block;
+  }
+  .scroll-hint {
+    position: absolute; bottom: 2.5rem; left: 50%;
+    transform: translateX(-50%);
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    opacity: 0.4;
+    animation: pulse-down 2s ease-in-out infinite;
+  }
+  @keyframes pulse-down {
+    0%, 100% { opacity: 0.2; transform: translateX(-50%) scaleY(0.8); }
+    50% { opacity: 0.5; transform: translateX(-50%) scaleY(1); }
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 0; position: relative; }
+  .section-label {
+    font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 600; line-height: 1.2;
+    margin-bottom: 1.5rem;
+    max-width: 650px;
+  }
+  .section-text {
+    font-size: 1rem; font-weight: 300;
+    color: var(--gray-light);
+    max-width: 600px;
+    line-height: 1.85;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    width: 50px; height: 1px;
+    background: var(--gold);
+    margin: 0 auto;
+    opacity: 0.3;
+  }
+
+  /* ── TEAM ── */
+  .team-section { background: var(--dark); padding: 6rem 0; }
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+  }
+  .team-card {
+    background: var(--charcoal);
+    border: 1px solid rgba(255,255,255,0.04);
+    padding: 2rem 1.5rem;
+    transition: border-color 0.4s, transform 0.35s;
+    position: relative;
+    overflow: hidden;
+  }
+  .team-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--gold);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .team-card:hover {
+    border-color: rgba(201,168,76,0.15);
+    transform: translateY(-3px);
+  }
+  .team-card:hover::before { opacity: 1; }
+  .team-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem; font-weight: 600;
+    margin-bottom: 0.6rem;
+    line-height: 1.3;
+  }
+  .team-card p {
+    font-size: 0.82rem; color: var(--gray);
+    line-height: 1.6;
+  }
+
+  /* ── PROJECT SECTIONS ── */
+  .project-section { padding: 6rem 0; }
+  .project-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+  .project-visual {
+    position: relative;
+    background: var(--charcoal);
+    border: 1px solid rgba(201,168,76,0.08);
+    aspect-ratio: 4/3;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    overflow: hidden;
+  }
+  .project-visual::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .project-visual-label {
+    font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.4rem;
+  }
+  .project-visual-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; font-weight: 600;
+    text-align: center; padding: 0 1.5rem;
+    line-height: 1.3;
+  }
+  .amenity-tags {
+    margin-top: 1.8rem;
+    display: flex; flex-wrap: wrap; gap: 0.6rem;
+    justify-content: center; padding: 0 1.2rem;
+  }
+  .amenity-tag {
+    font-size: 0.62rem; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--gray);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 0.35rem 0.7rem;
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .amenity-tag:hover {
+    border-color: rgba(201,168,76,0.3);
+    color: var(--gold);
+  }
+  .project-kpis {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.25rem; margin-top: 2rem;
+  }
+  .kpi {
+    border-left: 2px solid rgba(201,168,76,0.25);
+    padding-left: 0.9rem;
+  }
+  .kpi-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 700; color: var(--gold);
+    line-height: 1.2;
+  }
+  .kpi-label {
+    font-size: 0.68rem; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--gray); margin-top: 0.2rem;
+  }
+
+  /* ── DRAGON POINT ── */
+  .dragon-section {
+    background: var(--dark);
+    padding: 6rem 0;
+  }
+  .dragon-inner {
+    text-align: center;
+  }
+  .dragon-inner .section-title,
+  .dragon-inner .section-text {
+    margin-left: auto; margin-right: auto;
+  }
+  .dragon-timeline {
+    max-width: 720px;
+    margin: 3rem auto 0;
+    position: relative;
+  }
+  .dragon-timeline::before {
+    content: '';
+    position: absolute; top: 0; bottom: 0; left: 50%;
+    width: 1px; background: rgba(201,168,76,0.15);
+    transform: translateX(-50%);
+  }
+  .timeline-item {
+    display: flex; align-items: flex-start;
+    margin-bottom: 2.2rem;
+    position: relative;
+  }
+  .timeline-item:last-child { margin-bottom: 0; }
+  .timeline-item:nth-child(odd) { flex-direction: row; text-align: right; }
+  .timeline-item:nth-child(even) { flex-direction: row-reverse; text-align: left; }
+  .timeline-content {
+    width: 44%;
+    padding: 1rem 1.2rem;
+  }
+  .timeline-spacer { width: 44%; }
+  .timeline-dot {
+    position: absolute; left: 50%; top: 0.6rem;
+    width: 10px; height: 10px;
+    background: var(--gold);
+    border-radius: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    box-shadow: 0 0 8px rgba(201,168,76,0.3);
+  }
+  .timeline-year {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; font-weight: 700; color: var(--gold);
+    margin-bottom: 0.15rem;
+  }
+  .timeline-desc {
+    font-size: 0.85rem; color: var(--gray-light);
+    line-height: 1.6;
+  }
+
+  /* ── NAME REVEAL ── */
+  .name-reveal {
+    padding: 6rem 0;
+    text-align: center;
+    position: relative;
+  }
+  .name-reveal::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(201,168,76,0.03) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .name-reveal .section-text {
+    margin: 0 auto;
+  }
+  .name-reveal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4.5vw, 3.5rem);
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 1px;
+    margin-bottom: 0.6rem;
+    position: relative;
+  }
+  .name-reveal-sub {
+    font-size: 0.75rem; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 2rem;
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: var(--dark);
+    text-align: center;
+    padding: 6rem 0;
+  }
+  .cta-section .section-title {
+    margin-left: auto; margin-right: auto;
+    max-width: 700px;
+  }
+  .cta-section .section-text {
+    margin: 0 auto 2.5rem;
+  }
+  .cta-buttons {
+    display: flex; gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-block;
+    padding: 0.85rem 2.2rem;
+    font-size: 0.72rem; font-weight: 500;
+    letter-spacing: 2px; text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+  }
+  .btn-gold {
+    background: var(--gold); color: var(--black);
+    border: 1px solid var(--gold);
+  }
+  .btn-gold:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(201,168,76,0.2);
+  }
+  .btn-outline {
+    background: transparent; color: var(--white);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .btn-outline:hover {
+    border-color: var(--gold); color: var(--gold);
+    transform: translateY(-2px);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2.5rem 3rem;
+    text-align: center;
+    border-top: 1px solid rgba(201,168,76,0.06);
+  }
+  footer p {
+    font-size: 0.68rem; color: var(--gray);
+    letter-spacing: 1.5px; text-transform: uppercase;
+  }
+
+  /* ── ANIMATIONS ── */
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .reveal.visible {
+    opacity: 1; transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .team-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    nav.scrolled { padding: 0.7rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4.5rem 0; }
+    .project-layout { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-stats { gap: 2rem; flex-wrap: wrap; justify-content: center; }
+    .team-grid { grid-template-columns: 1fr 1fr; }
+    .timeline-item, .timeline-item:nth-child(odd), .timeline-item:nth-child(even) {
+      flex-direction: column; text-align: left; align-items: flex-start;
+    }
+    .dragon-timeline::before { left: 5px; }
+    .timeline-dot { left: 5px; }
+    .timeline-content { width: 100%; padding-left: 1.8rem; }
+    .timeline-spacer { display: none; }
+    .container { padding: 0 1.5rem; }
+  }
+  @media (max-width: 600px) {
+    .team-grid { grid-template-columns: 1fr; }
+    .project-kpis { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2.2rem; }
+    .hero-stats { gap: 1.5rem; }
+    .hero-stat-number { font-size: 1.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">Dragon Point Development Co.</div>
+  <div class="nav-links">
+    <a href="#team">Team</a>
+    <a href="#ironworks">Ironworks</a>
+    <a href="#dragon">Dragon Point</a>
+    <a href="#invest">Invest</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-badge">Introducing</div>
+  <h1>Building Brevard's<br><span>Next Legacy</span></h1>
+  <p class="hero-tagline">A development company with the vision to transform landmarks, the expertise to execute, and the ambition to leave a mark that lasts generations.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="hero-stat-number">$100M</span>
+      <span class="hero-stat-label">Development Target by 2035</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-number">2</span>
+      <span class="hero-stat-label">Inaugural Projects</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-number">1</span>
+      <span class="hero-stat-label">Iconic Restoration</span>
+    </div>
+  </div>
+  <div class="scroll-hint"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TEAM -->
+<section class="team-section" id="team">
+  <div class="container">
+    <div class="section-label reveal">Our Team</div>
+    <div class="section-title reveal reveal-delay-1">Built Different. Built to Build.</div>
+    <p class="section-text reveal reveal-delay-2">We assembled a team that covers every phase of a project from capital raise to certificate of occupancy. The best developments aren't handed off between strangers. They're built by people who sit at the same table.</p>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <h3>Strategic Capital</h3>
+        <p>MBA-trained strategists who structure deals, model returns, and speak the language of institutional and private investors.</p>
+      </div>
+      <div class="team-card reveal reveal-delay-1">
+        <h3>Entrepreneurial Vision</h3>
+        <p>Founders who have built businesses from scratch in competitive industries. We see opportunity where others see obstacles.</p>
+      </div>
+      <div class="team-card reveal reveal-delay-2">
+        <h3>Engineering Precision</h3>
+        <p>Licensed engineers who solve structural, civil, and systems challenges before they become change orders.</p>
+      </div>
+      <div class="team-card reveal reveal-delay-3">
+        <h3>Architectural Design</h3>
+        <p>Architects who design spaces that honor their surroundings and elevate their communities. Every project is designed with intent.</p>
+      </div>
+      <div class="team-card reveal reveal-delay-4">
+        <h3>Construction Execution</h3>
+        <p>Licensed general contractors delivering on time and on budget. We drive piles, pour concrete, and hand over keys.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- IRONWORKS -->
+<section class="project-section" id="ironworks">
+  <div class="container">
+    <div class="project-layout reveal">
+      <div>
+        <div class="section-label">Project One</div>
+        <div class="section-title">Ironworks</div>
+        <p class="section-text">If our first project was the only thing we ever built, it would still be one for the books. Ironworks is a waterfront mixed-use development on Crane Creek that captures the full fingerprint of what this team is capable of: raising capital, world-class design, precision engineering, and construction execution from foundation to finish.</p>
+        <p class="section-text" style="margin-top:1rem;">A 6-lane underground shooting range. A 21-slip marina. A rooftop event deck with panoramic river views. A members-only lifestyle club layered on top of commercial real estate income. This is a destination, anchored by a manufacturing tenant and powered by a membership model that delivers 59% margins.</p>
+        <div class="project-kpis">
+          <div class="kpi">
+            <div class="kpi-value">$9.1M&ndash;$12.2M</div>
+            <div class="kpi-label">Development Cost</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-value">$2.78M</div>
+            <div class="kpi-label">Year 1 Revenue</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-value">14.3%</div>
+            <div class="kpi-label">Projected CAGR</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-value">3.80x</div>
+            <div class="kpi-label">10-Year ROI</div>
+          </div>
+        </div>
+      </div>
+      <div class="project-visual">
+        <div class="project-visual-label">Crane Creek Waterfront</div>
+        <div class="project-visual-title">Mixed-Use. Members-Only.<br>Monumental.</div>
+        <div class="amenity-tags">
+          <span class="amenity-tag">Underground Range</span>
+          <span class="amenity-tag">21-Slip Marina</span>
+          <span class="amenity-tag">Rooftop Deck</span>
+          <span class="amenity-tag">Membership Club</span>
+          <span class="amenity-tag">Cafe &amp; Bar</span>
+          <span class="amenity-tag">Manufacturing HQ</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- DRAGON POINT -->
+<section class="dragon-section" id="dragon">
+  <div class="container">
+    <div class="dragon-inner">
+      <div class="section-label reveal">Project Two</div>
+      <div class="section-title reveal reveal-delay-1">The Dragon Point Restoration</div>
+      <p class="section-text reveal reveal-delay-2">Ironworks sets a high bar. So what do you do for an encore? You choose a project that doesn't just develop land&mdash;it restores a legend. Dragon Point is the most recognized landmark in Brevard County history. A fire-breathing dragon sculpture that stood for three decades at the southern tip of Merritt Island, where the Indian and Banana Rivers meet, visible to every boater on the lagoon.</p>
+      <p class="section-text reveal reveal-delay-3" style="margin-top:1rem;">She fell in 2002. Developers have tried and failed to bring her back three times. We intend to succeed&mdash;because this isn't just a project. This is a statement. When the locals rally behind your name, you can build anything you want next.</p>
+
+      <div class="dragon-timeline reveal">
+        <div class="timeline-item">
+          <div class="timeline-content" style="margin-left:auto;">
+            <div class="timeline-year">1971</div>
+            <div class="timeline-desc">Artist Lewis VanDercar sculpts "Annie"&mdash;a 35-foot, 65-foot-long, 20-ton concrete and steel dragon. She becomes an instant Brevard icon.</div>
+          </div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-spacer"></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-spacer"></div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">1974</div>
+            <div class="timeline-desc">Annie breathes fire for the first time. Red eyes glow at night. Propane flamethrower lights up the lagoon at Fourth of July celebrations.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content" style="margin-left:auto;">
+            <div class="timeline-year">1981</div>
+            <div class="timeline-desc">Warren McFadden expands the legend: extended neck, tail, cave people, and four hatchlings. 27,000 visitors come through.</div>
+          </div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-spacer"></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-spacer"></div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">2002</div>
+            <div class="timeline-desc">Annie collapses into the lagoon during a storm, worsened by vandalism. Three subsequent attempts to rebuild her all fail.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content" style="margin-left:auto;">
+            <div class="timeline-year">Now</div>
+            <div class="timeline-desc">Dragon Point Development Co. acquires the site. 0.86 acres. 1,398 feet of waterfront. 180-degree views. One mission: bring the dragon home.</div>
+          </div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-spacer"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NAME REVEAL -->
+<section class="name-reveal">
+  <div class="container">
+    <div class="section-label reveal">Why the Name</div>
+    <div class="name-reveal-title reveal reveal-delay-1">Dragon Point Development Co.</div>
+    <div class="name-reveal-sub reveal reveal-delay-2">Named for the landmark. Built for the legacy.</div>
+    <p class="section-text reveal reveal-delay-3" style="text-align:center;">Our company is named after the place where legends are made. Ironworks proves what we can build. Dragon Point proves what we stand for. When you restore something an entire county has been waiting 24 years to see again, your name means something. That's the foundation we build everything else on.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CTA -->
+<section class="cta-section" id="invest">
+  <div class="container">
+    <div class="section-label reveal">What's Next</div>
+    <div class="section-title reveal reveal-delay-1" style="max-width:700px; margin-left:auto; margin-right:auto;">Two Projects Launched.<br>$100 Million To Go.</div>
+    <p class="section-text reveal reveal-delay-2">We are actively seeking strategic investors and development clients who want to be part of Brevard County's most ambitious new development company. Whether you want to invest in our next project or bring us your next build, the table is open.</p>
+    <div class="cta-buttons reveal reveal-delay-3">
+      <a href="mailto:esansoni09@gmail.com?subject=Dragon%20Point%20Development%20%E2%80%94%20Investor%20Inquiry" class="btn btn-gold">Invest With Us</a>
+      <a href="mailto:esansoni09@gmail.com?subject=Dragon%20Point%20Development%20%E2%80%94%20Client%20Inquiry" class="btn btn-outline">Become a Client</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 Dragon Point Development Co. &bull; Melbourne, FL &bull; Brevard County</p>
+</footer>
+
+<script>
+  // Nav scroll behavior
+  const nav = document.getElementById('nav');
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        nav.classList.toggle('scrolled', window.scrollY > 60);
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  // Intersection Observer for reveal animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
