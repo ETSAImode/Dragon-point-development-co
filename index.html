@@ -486,6 +486,94 @@
     justify-content: center;
     flex-wrap: wrap;
   }
+
+  /* ── CONTACT FORM ── */
+  .contact-form {
+    max-width: 540px;
+    margin: 2.5rem auto 0;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .form-row.full {
+    grid-template-columns: 1fr;
+  }
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .form-field label {
+    font-size: 0.62rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .form-field input,
+  .form-field textarea {
+    background: var(--charcoal);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.88rem;
+    padding: 0.75rem 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  .form-field input:focus,
+  .form-field textarea:focus {
+    border-color: var(--gold);
+  }
+  .form-field input::placeholder,
+  .form-field textarea::placeholder {
+    color: var(--gray);
+    font-size: 0.82rem;
+  }
+  .form-field textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+  .form-submit {
+    margin-top: 1.5rem;
+    text-align: center;
+  }
+  .form-submit button {
+    display: inline-block;
+    padding: 0.85rem 2.8rem;
+    font-size: 0.72rem; font-weight: 500;
+    letter-spacing: 2px; text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+    background: var(--gold); color: var(--black);
+    border: 1px solid var(--gold);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .form-submit button:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(201,168,76,0.2);
+  }
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 2rem;
+  }
+  .form-success h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .form-success p {
+    font-size: 0.9rem;
+    color: var(--gray-light);
+  }
+  @media (max-width: 600px) {
+    .form-row { grid-template-columns: 1fr; }
+  }
   .btn {
     display: inline-block;
     padding: 0.85rem 2.2rem;
@@ -787,9 +875,40 @@
     <div class="section-label reveal">What's Next</div>
     <div class="section-title reveal reveal-delay-1" style="max-width:700px; margin-left:auto; margin-right:auto;">Two Projects Launched.<br>$100 Million To Go.</div>
     <p class="section-text reveal reveal-delay-2">We are actively seeking strategic investors and development clients who want to be part of Brevard County's most ambitious new development company. Whether you want to invest in our next project or bring us your next build, the table is open.</p>
-    <div class="cta-buttons reveal reveal-delay-3">
-      <a href="mailto:esansoni09@gmail.com?subject=Dragon%20Point%20Development%20%E2%80%94%20Investor%20Inquiry" class="btn btn-gold">Invest With Us</a>
-      <a href="mailto:esansoni09@gmail.com?subject=Dragon%20Point%20Development%20%E2%80%94%20Client%20Inquiry" class="btn btn-outline">Become a Client</a>
+
+    <form class="contact-form reveal reveal-delay-3" id="contactForm" action="https://formspree.io/f/https://formspree.io/f/xrerkyzk" method="POST">
+      <div class="form-row">
+        <div class="form-field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your full name" required>
+        </div>
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="your@email.com" required>
+        </div>
+      </div>
+      <div class="form-row full">
+        <div class="form-field">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555">
+        </div>
+      </div>
+      <div class="form-row full">
+        <div class="form-field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Tell us about your interest — investment, development project, or partnership." required></textarea>
+        </div>
+      </div>
+      <input type="hidden" name="_subject" value="Dragon Point Development — New Inquiry">
+      <input type="hidden" name="_replyto" value="">
+      <div class="form-submit">
+        <button type="submit">Send Inquiry</button>
+      </div>
+    </form>
+
+    <div class="form-success" id="formSuccess">
+      <h3>Message Received</h3>
+      <p>We'll be in touch shortly. Thank you for your interest in Dragon Point Development Co.</p>
     </div>
   </div>
 </section>
@@ -824,6 +943,36 @@
   }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Contact form handler
+  const form = document.getElementById('contactForm');
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+      try {
+        const resp = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (resp.ok) {
+          form.style.display = 'none';
+          document.getElementById('formSuccess').style.display = 'block';
+        } else {
+          btn.textContent = 'Send Inquiry';
+          btn.disabled = false;
+          alert('Something went wrong. Please try again or email us directly at team@xvxiii.com');
+        }
+      } catch (err) {
+        btn.textContent = 'Send Inquiry';
+        btn.disabled = false;
+        alert('Something went wrong. Please try again or email us directly at team@xvxiii.com');
+      }
+    });
+  }
 </script>
 
 </body>
